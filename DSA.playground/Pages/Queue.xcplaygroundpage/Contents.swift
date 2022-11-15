@@ -10,7 +10,7 @@ enum QueueErrors: Error {
 /**
  * Queue implementation
  */
-class Queue<T> {
+struct Queue<T> {
     private var queue: [T]
     private let size: Int
     
@@ -43,7 +43,7 @@ class Queue<T> {
     /**
      * Add to queue
      */
-    func enqueue(_ value: T) throws {
+    mutating func enqueue(_ value: T) throws {
         if (isFull) {
             throw QueueErrors.queueFull
         }
@@ -53,7 +53,7 @@ class Queue<T> {
     /**
      * Remove from queue
      */
-    func dequeue() -> T? {
+    mutating func dequeue() -> T? {
         if (isEmpty) {
             return nil
         }
@@ -78,7 +78,7 @@ class Queue<T> {
  * Queue usage example
  * ---------------------------------------------------------------------------------------
  */
-let queue = Queue<Int>(size: 5)
+var queue = Queue<Int>(size: 5)
 
 // Check initial states
 assert(queue.dequeue() == nil)

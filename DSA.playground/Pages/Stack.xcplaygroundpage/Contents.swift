@@ -11,7 +11,7 @@ enum StackError: Error {
 /**
  * Stack implementation
  */
-class Stack<T> {
+struct Stack<T> {
     private var stack: [T]
     private let size: Int
     
@@ -44,7 +44,7 @@ class Stack<T> {
     /**
      * Push value to stack
      */
-    func push(_ value: T) throws {
+    mutating func push(_ value: T) throws {
         if isFull {
             throw StackError.stackOverflow
         }
@@ -55,7 +55,7 @@ class Stack<T> {
     /**
      * Pop value from stack
      */
-    func pop() throws -> T {
+    mutating func pop() throws -> T {
         if isEmpty {
             throw StackError.emptyStack
         }
@@ -80,7 +80,7 @@ class Stack<T> {
  * Stack usage example
  * ---------------------------------------------------------------------------------------
  */
-let stack = Stack<Int>(size: 5)
+var stack = Stack<Int>(size: 5)
 
 // Check initial states
 do {
