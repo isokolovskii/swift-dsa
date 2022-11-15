@@ -61,10 +61,6 @@ struct Queue<T> {
      * Peek at first item in queue
      */
     var peek:T? {
-        if (isEmpty) {
-            return nil
-        }
-        
         return queue.first
     }
 }

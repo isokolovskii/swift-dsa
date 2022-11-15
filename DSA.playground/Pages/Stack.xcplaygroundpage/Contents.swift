@@ -62,10 +62,6 @@ struct Stack<T> {
      * Get value on top of stack
      */
     var peek: T? {
-        if isEmpty {
-            return nil
-        }
-        
         return stack.last
     }
 }
