@@ -1,2 +1,1 @@
-# swift-dsa
-Swift Data Structures and Algorithms
+# Swift Data Structures and Algorithms
