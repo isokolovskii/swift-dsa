@@ -26,18 +26,14 @@ struct Queue<T> {
      * Check if queue is empty
      */
     var isEmpty: Bool  {
-        get {
-            return queue.count == 0
-        }
+        return queue.count == 0
     }
     
     /**
      * Check if queue is full
      */
     var isFull: Bool {
-        get {
-            return queue.count == size
-        }
+        return queue.count == size
     }
     
     /**
@@ -64,12 +60,12 @@ struct Queue<T> {
     /**
      * Peek at first item in queue
      */
-    func peek() -> T? {
+    var peek:T? {
         if (isEmpty) {
             return nil
         }
         
-        return queue[0]
+        return queue.first
     }
 }
 
@@ -82,7 +78,7 @@ var queue = Queue<Int>(size: 5)
 
 // Check initial states
 assert(queue.dequeue() == nil)
-assert(queue.peek() == nil)
+assert(queue.peek == nil)
 assert(queue.isEmpty == true)
 assert(queue.isFull == false)
 
@@ -97,16 +93,18 @@ assert(queue.isEmpty == false)
 assert(queue.isFull == false)
 
 // Check peek
-if let peekValue = queue.peek() {
+if let peekValue = queue.peek {
     assert(peekValue == 5)
 } else {
     assert(false)
 }
 
 // Check pop
-if let popValue = queue.dequeue(), let peekValue = queue.peek() {
+if let popValue = queue.dequeue(), let peekValue = queue.peek {
     assert(popValue == 5)
     assert(peekValue == 10)
+} else {
+    assert(false)
 }
 
 // Check is full

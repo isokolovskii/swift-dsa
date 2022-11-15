@@ -4,7 +4,6 @@ import Foundation
  * Stack errors
  */
 enum StackError: Error {
-    case emptyStack
     case stackOverflow
 }
 
@@ -27,18 +26,14 @@ struct Stack<T> {
      * Check if stack is empty
      */
     var isEmpty: Bool {
-        get {
-            return stack.count == 0
-        }
+        return stack.count == 0
     }
     
     /**
      * Check if stack is full
      */
     var isFull: Bool {
-        get {
-            return stack.count == size
-        }
+        return stack.count == size
     }
     
     /**
@@ -55,9 +50,9 @@ struct Stack<T> {
     /**
      * Pop value from stack
      */
-    mutating func pop() throws -> T {
+    mutating func pop() -> T? {
         if isEmpty {
-            throw StackError.emptyStack
+            return nil
         }
         
         return stack.removeLast()
@@ -66,12 +61,12 @@ struct Stack<T> {
     /**
      * Get value on top of stack
      */
-    func peek() throws -> T {
+    var peek: T? {
         if isEmpty {
-            throw StackError.emptyStack
+            return nil
         }
         
-        return stack[stack.count - 1]
+        return stack.last
     }
 }
 
@@ -83,20 +78,8 @@ struct Stack<T> {
 var stack = Stack<Int>(size: 5)
 
 // Check initial states
-do {
-    try stack.pop()
-} catch StackError.emptyStack {
-    assert(true)
-} catch {
-    assert(false)
-}
-do {
-    try stack.peek()
-} catch StackError.emptyStack {
-    assert(true)
-} catch {
-    assert(false)
-}
+assert(stack.pop() == nil)
+assert(stack.peek == nil)
 assert(stack.isEmpty == true)
 assert(stack.isFull == false)
 
@@ -111,14 +94,19 @@ assert(stack.isEmpty == false)
 assert(stack.isFull == false)
 
 // Check peek
-let peekValue = try stack.peek()
-assert(peekValue == 2)
+if let peekValue = stack.peek {
+    assert(peekValue == 2)
+} else {
+    assert(false)
+}
 
 // Check pop
-let popValue = try stack.pop()
-let peekValue2 = try stack.peek()
-assert(popValue == 2)
-assert(peekValue2 == 4)
+if let popValue = stack.pop(), let peekValue = stack.peek {
+    assert(popValue == 2)
+    assert(peekValue == 4)
+} else {
+    assert(false)
+}
 
 // Check is full
 try stack.push(3)
