@@ -16,6 +16,10 @@ Stack is LIFO data structure. Provided implementation is based on array.
 
 Queue is FIFO data structure. Provided implementation is based on array.
 
+### Circular Queue
+
+Circular queue is FIFO data structure with O(1) complexity of enqueueing and dequeueing(which is better than ordinary queue). Provided implementation is based on array
+
 #### Useful links
 
 - [DSA tutorial](https://www.programiz.com/dsa)
